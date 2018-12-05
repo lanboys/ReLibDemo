@@ -3,6 +3,7 @@
 
 import urllib
 import urllib2
+
 from lxml import etree
 
 
@@ -62,7 +63,7 @@ def writeImage(link):
     # 图片原始数据
     image = urllib2.urlopen(request).read()
     # 取出连接后10位做为文件名
-    filename = "meizi/"+link[-10:]
+    filename = "meizi/" + link[-10:]
     # 写入到本地磁盘文件内
     with open(filename, "wb") as f:
         f.write(image)
@@ -88,9 +89,9 @@ def tiebaSpider(url, beginPage, endPage):
 
 
 if __name__ == "__main__":
-    #kw = raw_input("请输入需要爬取的贴吧名:")
-    #beginPage = int(raw_input("请输入起始页："))
-    #endPage = int(raw_input("请输入结束页："))
+    # kw = raw_input("请输入需要爬取的贴吧名:")
+    # beginPage = int(raw_input("请输入起始页："))
+    # endPage = int(raw_input("请输入结束页："))
 
     kw = "美女"
     beginPage = 1

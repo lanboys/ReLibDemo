@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
+import re
 import urllib
 import urllib2
+
 from lxml import etree
-import re
 
 
 def loadPage(url):
@@ -53,10 +54,10 @@ def loadImage(srcLink):
     # 取出每个图片的连接
     for link in link_list:
         print "图片地址： " + link
-        writeImage(link,srcLink)
+        writeImage(link, srcLink)
 
 
-def writeImage(link,srcLink):
+def writeImage(link, srcLink):
     """
         作用：将html内容写入到本地
         link：图片连接

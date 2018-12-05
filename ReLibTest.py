@@ -9,13 +9,61 @@ def retest():
     # ^ 匹配输入字行首。如果设置了RegExp对象的Multiline属性，^也匹配“\n”或“\r”之后的位置
     # $ 匹配输入行尾。如果设置了RegExp对象的Multiline属性，$也匹配“\n”或“\r”之前的位置。
 
-    pattern = re.compile("^qw.*sj$\n^f.*qw2$\n^.*qw$", re.M)
+    pattern = re.compile(r"\d{1,3}")
+    m = pattern.findall("h123 ddd 234d 13d4iu 43433")
+    if m is not None:
+        print(m)
+    else:
+        print("--not find--")
+    print("-------------------------")
+
+    pattern = re.compile(r"[a-z]\d?")
+    m = pattern.findall("hello a1b 23c456 t346")
+    if m is not None:
+        print(m)
+    else:
+        print("--not find--")
+    print("-------------------------")
+
+    pattern = re.compile(r"\d?")
+    m = pattern.findall("h")
+    if m is not None:
+        print(m)
+    else:
+        print("--not find--")
+    print("-------------------------")
+
+    # 非贪婪模式  从头(最少字符串)开始匹配,
+    pattern = re.compile("e.*?a")
+    # 贪婪模式  从尾(最多字符串)开始匹配
+    # pattern = re.compile("e.*a")
+    m = pattern.findall("1 ef5 ew32 aef ska")
+    if m is not None:
+        print(m)
+    else:
+        print("--not find--")
+    print("-------------------------")
+
+    pattern = re.compile("^.*?$", re.M)
+    m = pattern.match("abce fg1\n" +
+                      "4adike\n" +
+                      "ganhgi")
+
+    if m is not None:
+        print(m.group())
+    else:
+        print("--not find--")
+    print("-------------------------")
+
+    pattern = re.compile("^qw.*?sj$\n^f.*qw2$\n^.*qw$", re.M)
 
     m = pattern.match("qwrewrwfjsj\n" +
                       "flswrewrwreqw2\n" +
                       "qwqw12qw")
-
-    print(m.group())
+    if m is not None:
+        print(m.group())
+    else:
+        print("--not find--")
     print("-------------------------")
 
     # 测试贪婪模式？？？？？？？？
