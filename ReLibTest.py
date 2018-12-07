@@ -1,6 +1,11 @@
 # -*- coding:utf-8 -*-
 import re
 
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 
 # https://baike.baidu.com/item/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/1700215?fr=aladdin&fromtitle=%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F&fromid=6555484
 def retest():
@@ -8,6 +13,23 @@ def retest():
     # 不开多行的话, ^$只匹配当行起始和结尾
     # ^ 匹配输入字行首。如果设置了RegExp对象的Multiline属性，^也匹配“\n”或“\r”之后的位置
     # $ 匹配输入行尾。如果设置了RegExp对象的Multiline属性，$也匹配“\n”或“\r”之前的位置。
+
+    pattern = re.compile(r"共(\d*)页")
+    m = pattern.findall("共 5 45  页 共 5 45  页".replace(" ", ""))
+    if len(m) > 0:
+        for s in m:
+            print(s)
+    else:
+        print("--not find--")
+    print("-------------------------")
+
+    pattern = re.compile(r"(\d*)评论(\d*)人气")
+    m = pattern.findall("68 评论  5209 人气 6118 评论  51209 人气".replace(" ", ""))
+    if m is not None:
+        print(m)
+    else:
+        print("--not find--")
+    print("-------------------------")
 
     pattern = re.compile(r"\d{1,3}")
     m = pattern.findall("h123 ddd 234d 13d4iu 43433")
@@ -55,13 +77,15 @@ def retest():
         print("--not find--")
     print("-------------------------")
 
-    pattern = re.compile("^qw.*?sj$\n^f.*qw2$\n^.*qw$", re.M)
+    pattern = re.compile("^qw.*?sj$(\n^f.*qw2$)\n^.*qw$", re.M)
 
     m = pattern.match("qwrewrwfjsj\n" +
                       "flswrewrwreqw2\n" +
                       "qwqw12qw")
     if m is not None:
         print(m.group())
+        # 不传 表示匹配的整个字符串  传 表示取第几分组数据(前提是表达式中有分组)
+        print(m.group(1))
     else:
         print("--not find--")
     print("-------------------------")
